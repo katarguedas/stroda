@@ -3,3 +3,57 @@
 body {
   background-color: var(--background-color);
 }
+
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.landingpage-header {
+  // min-height: 200px;
+  height: 35vh;
+  display: flex;
+  color: white;
+  align-items: center;
+  background-image: url(/banner.jpg);
+  background-repeat: no-repeat;
+}
+
+.site-content {
+  flex: 1;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: var(--footer-background);
+}
+
+
+.startlink {
+  padding: 1.0rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  align-items: center;
+}
+
+.checkboxForm {
+  margin: 0.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}

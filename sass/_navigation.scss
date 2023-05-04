@@ -8,6 +8,16 @@ a {
   }
 }
 
+.nav-link {
+  padding: 1.0rem;
+  text-decoration: none;
+}
+
+.navigation {
+  margin: 1.0rem;
+  text-transform: uppercase;
+}
+
 // $mobile-menu-max: rem(500);
 
 // $mobile-menu: 'width <= #{$mobile-menu-max}';

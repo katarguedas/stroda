@@ -4,20 +4,24 @@
   color-scheme: light dark;
 
   // Variablennamen zum Beschreiben der Farbe
-  --imperial-red: hsl(354.8 60.6% 51.2%);
+  // --imperial-red: hsl(354.8 60.6% 51.2%);
   --honeydew: hsl(105 55% 96%);
   --powder-blue: hsl(182 43% 76%);
   --celadon-blue: hsl(203 39% 44%);
   --prussian-blue: hsl(215 50% 23%);
   --black: hsl(0 10% 6%);
+  --darkslategray: #2F4F4F;
+  --background: #edf7ff;
+  --bg-footer-color: #93baba;
 
   // Variablennamen zum Beschreiben der Funktion
-  --background-color: var(--honeydew);
-  --text-color: var(--prussian-blue);
+  --background-color: var(--background);
+  --text-color: var(--darkslategray);
   --heading-color: var(--imperial-red);
   --link-color: var(--imperial-red);
   --active-link-color: var(--celadon-blue);
-  --header-footer-background: var(--powder-blue);
+  // --header-footer-background: var(--powder-blue);
+  --footer-background: var(--bg-footer-color)
   --header-color: var(--imperial-red);
   // https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web
   @media (prefers-color-scheme: dark) {
