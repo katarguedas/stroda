@@ -17,7 +17,7 @@ export default async function DatenvergleichPage() {
 
   const monthDataPerYear = await getStromverbrauchData(years)
 
-  console.log("data Stromverbrauch", monthDataPerYear)
+  // console.log("data Stromverbrauch", monthDataPerYear)
 
 
   return (
@@ -29,7 +29,7 @@ export default async function DatenvergleichPage() {
           <SelectionPanel1 />
           <div  >
             {/* <ChartViewer data={monthDataPerYear} /> */}
-            <BarChart data={monthDataPerYear} />
+            <BarChart data={monthDataPerYear} years={years} />
           </div>
 
 

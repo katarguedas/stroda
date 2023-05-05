@@ -27,17 +27,24 @@ export default function BarChart({ data }) {
   // const [selectedData, setSelectedData] = useState<selectedState>();
   const [selectedData, setSelectedData] = useState([]);
 
-  console.log(data)
+  const removeData = (year) =>{
+    const tmp=[...selectedData];
+      const selected = tmp.filter(e => e.name !== year);
+      console.log("res: ", selected);
+      setSelectedData(selected);
+  }
+
   useEffect(() => {
     years.map((year, index) => {
-      if (isChecked[index]) {
-        console.log(index)
-        console.log("year",years[index])
-        console.log(data[index])
-      setSelectedData([...selectedData, data[index]])
-    }
+      if ((isChecked[index]) & (!selectedData.find(e => e.name === year))) {
+      setSelectedData([...selectedData, {name: year, data: data[index]}])
+    } else if (!isChecked[index]) {
+      if (selectedData.find(e => e.name === year)) {
+      removeData(year)
+      }
+    }  
     })
-    console.log("selectedData",selectedData)
+    // console.log("selectedData:  \n",selectedData)
   }, [isChecked, selectedCategory])
 
 
@@ -54,7 +61,7 @@ export default function BarChart({ data }) {
     },
     yAxis: [
       {
-        max: 100
+        // max: 100
       }
     ],
     plotOptions: {
@@ -64,26 +71,8 @@ export default function BarChart({ data }) {
         groupPadding: 0.05,
       }
     },
-    series: [
-      {
-        pointWidth: 25,
-        color: "lightgrey",
-        data: [71.5, {
-          color: "red",
-          y: 89.9,
-        }, 16.4, 29.2, 44.0, 76.0, 35.6, 48.5]
-      },
-      {
-        color: "#407bfb",
-        data: selectedData[0]
-      },
-      // {
-      //   color: "#407bfb",
-      //   data: [0, 70.1]
-      // },
-    ]
+    series: selectedData
   };
-
 
   return (
     <div>
