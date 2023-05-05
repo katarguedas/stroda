@@ -1,22 +1,26 @@
 'use client'
 import { SetStateAction, createContext, useContext, useState } from "react"
 import useData from "../hooks/useData";
-import type { StromverbrauchRow, StromerzeugungRow, LeistungRow } from "@/types/supabase-myTypes";
 
 export type ContextCompTypes = {
   years: string[];
-  isChecked: boolean[];
-  setIsChecked: React.Dispatch<SetStateAction<boolean[]>>;
-  selectedCategory: string;
-  setSelectedCategory: React.Dispatch<SetStateAction<string>>;
+  yearIsChecked: boolean[];
+  setYearIsChecked: React.Dispatch<SetStateAction<boolean[]>>;
+  selectedGroup: string;
+  setSelectedGroup: React.Dispatch<SetStateAction<string>>;
+  groups: string[];
   categories: string[];
-  // oneYearData: StromverbrauchRow[][] | StromerzeugungRow[][] | LeistungRow[][];
-  // setOneYearData: React.Dispatch<SetStateAction<StromverbrauchRow[][]>> | React.Dispatch<SetStateAction<StromerzeugungRow[][]>> | React.Dispatch<SetStateAction<LeistungRow[][]>>;
-  getDataForBarChart(arg0: string, arg1: number): void;
+  categoriesLC: string[];
+  categoryChecked: boolean[];
+  setCategoryChecked: React.Dispatch<SetStateAction<boolean[]>>;
+  group: string;
+  setGroup: React.Dispatch<SetStateAction<string>>;
 }
 
 const years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'];
-const categories = ['Stromverbrauch', 'Stromerzeugung', 'installierte Leistung'];
+const groups = ['Stromverbrauch', 'Stromerzeugung', 'installierte Leistung'];
+const categories = ['Biomasse', 'Braunkohle', 'Erdgas', 'Kernenergie', 'Photovoltaik', 'Pumpspeicher', 'sonstige Erneuerbare', 'sonstige Konventionelle', 'Steinkohle', 'Wasserkraft', 'Wind Offshore', 'Wind Onshore']
+const categoriesLC = ['biomasse', 'braunkohle', 'erdgas', 'kernenergie', 'photovoltaik', 'pumpspeicher', 'sonstigeErneuerbare', 'sonstigeKonventionelle', 'steinkohle', 'wasserkraft', 'windOffshore', 'WindOnshore']
 
 
 const DataCompContext = createContext<ContextCompTypes>(null!)
@@ -33,19 +37,16 @@ const DataCompContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [isChecked, setIsChecked] = useState<boolean[]>(new Array(years.length).fill(false));
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [oneYearData, setOneYearData] = useState
-    <StromverbrauchRow[][] | StromerzeugungRow[][] | LeistungRow[][]>([]);
+  const [yearIsChecked, setYearIsChecked] = useState<boolean[]>(new Array(years.length).fill(false));
+  const [categoryChecked, setCategoryChecked] = useState(new Array(categories.length).fill(false));
+  const [selectedGroup, setSelectedGroup] = useState<string>('');
+  const [group, setGroup] = useState('');
 
-  const [getDataForBarChart] = useData();
 
   return (
     <DataCompContext.Provider
       value={{
-        years: years, isChecked, setIsChecked, selectedCategory, setSelectedCategory, categories,
-        // oneYearData, setOneYearData,
-        getDataForBarChart
+        years, groups, categories, categoriesLC, yearIsChecked, setYearIsChecked, categoryChecked, setCategoryChecked, selectedGroup, setSelectedGroup, group, setGroup
       }} >
       {children}
     </DataCompContext.Provider >

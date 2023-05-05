@@ -1,12 +1,38 @@
 'use client';
 
 import { supabase } from '../helpers/supabaseClient';
+import { useDataCompContext } from '../provider/dataComparisonContext';
 
 const useData = () => {
+  const {
+    yearIsChecked,
+    setYearIsChecked,
+    categoryChecked,
+    setCategoryChecked,
+  } = useDataCompContext();
+
+  const clearYearIsChecked = () => {
+    setYearIsChecked(
+      yearIsChecked.map((e, i) => {
+        if (e === true) e = !e;
+        return e;
+      }),
+    );
+  };
+
+  const clearCategoryCheck = () => {
+    setCategoryChecked(
+      categoryChecked.map((e, i) => {
+        if (e === true) e = !e;
+        return e;
+      })
+    );
+  };
+
   //
-  const getDataForBarChart = async (category: string, year: number) => {
-    if (category && category.length > 0) {
-      const tableName = getTableName(category);
+  const getDataForBarChart = async (group: string, year: number) => {
+    if (group && group.length > 0) {
+      const tableName = getTableName(group);
       console.log('start....');
       const { data, error } = await supabase
         .from(tableName!)
@@ -14,11 +40,11 @@ const useData = () => {
         .like('Datum', '%' + year.toString());
       console.log('DATA aus ', tableName, ' \n', data);
       console.log('fertig');
-      return(data);
+      return data;
     }
 
-    function getTableName(category: string) {
-      switch (category) {
+    function getTableName(group: string) {
+      switch (group) {
         case 'Stromverbrauch':
           return 'Stromverbrauch';
         case 'Stromerzeugung':
@@ -28,7 +54,6 @@ const useData = () => {
       }
     }
   };
-
 
   //
   return [getDataForBarChart];

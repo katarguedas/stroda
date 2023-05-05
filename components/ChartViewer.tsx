@@ -10,7 +10,7 @@ type Props = {
 
 export default function ChartViewer({ data }: Props) {
 
-  const { years, isChecked, selectedCategory } = useDataCompContext();
+  const { years, isChecked, selectedGroup: selectedGroup } = useDataCompContext();
 
   console.log("bin im chart Viewer,")
   console.log("folgende Jahre wurden gewählt:")

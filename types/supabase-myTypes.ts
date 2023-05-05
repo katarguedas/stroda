@@ -1,47 +1,69 @@
-export type StromverbrauchRow = {
-  Anfang: string | null;
-  Datum: string | null;
-  Ende: string | null;
-  Gesamt: string | null;
-  id: number;
-  Pumpspeicher: string | null;
-  Residuallast: string | null;
+export type Stromverbrauch = {
+  gesamt: number[][];
 };
 
-export type StromerzeugungRow = {
-  Anfang: string | null;
-  Biomasse: string | null;
-  Braunkohle: string | null;
-  Datum: string | null;
-  Ende: string | null;
-  Erdgas: string | null;
-  id: number;
-  Kernenergie: string | null;
-  Photovoltaik: string | null;
-  Pumpspeicher: string | null;
-  'Sonstige Erneuerbare': string | null;
-  'Sonstige Konventionelle': string | null;
-  Steinkohle: string | null;
-  Wasserkraft: string | null;
-  'Wind Offshore': string | null;
-  'Wind Onshore': string | null;
+export type Stromerzeugung = {
+  biomasse: number[][] | undefined;
+  braunkohle: number[][] | undefined;
+  erdgas: number[][] | undefined;
+  kernenergie?: number[][] | undefined;
+  photovoltaik?: number[][] | undefined;
+  pumpspeicher?: number[][] | undefined;
+  sonstigeErneuerbare?: number[][] | undefined;
+  sonstigeKonventionelle?: number[][] | undefined;
+  steinkohle?: number[][] | undefined;
+  wasserkraft?: number[][] | undefined;
+  windOffshore?: number[][] | undefined;
+  windOnshore?: number[][] | undefined;
 };
 
-export type LeistungRow = {
-  Anfang: string | null;
-  Biomasse: number | null;
-  Braunkohle: string | null;
-  Datum: string | null;
-  Ende: string | null;
-  Erdgas: string | null;
-  id: number;
-  Kernenergie: string | null;
-  Photovoltaik: number | null;
-  Pumpspeicher: string | null;
-  'Sonstige Erneuerbare': number | null;
-  'Sonstige Konventionelle': string | null;
-  Steinkohle: string | null;
-  Wasserkraft: number | null;
-  'Wind Offshore': string | null;
-  'Wind Onshore': string | null;
+export type Leistung = {
+  biomasse: number[][] | undefined;
+  braunkohle: number[][] | undefined;
+  erdgas: number[][] | undefined;
+  kernenergie?: number[][] | undefined;
+  photovoltaik?: number[][] | undefined;
+  pumpspeicher?: number[][] | undefined;
+  sonstigeErneuerbare?: number[][] | undefined;
+  sonstigeKonventionelle?: number[][] | undefined;
+  steinkohle?: number[][] | undefined;
+  wasserkraft?: number[][] | undefined;
+  windOffshore?: number[][] | undefined;
+  windOnshore?: number[][] | undefined;
 };
+
+// 
+
+export type Alldata = [
+  {
+    gesamt: number[][];
+  },
+  {
+    biomasse: number[][];
+    braunkohle: number[][];
+    erdgas: number[][];
+    kernenergie?: number[][];
+    photovoltaik?: number[][];
+    pumpspeicher?: number[][];
+    sonstigeErneuerbare?: number[][];
+    sonstigeKonventionelle?: number[][];
+    steinkohle?: number[][];
+    wasserkraft?: number[][];
+    windOffshore?: number[][];
+    windOnshore?: number[][];
+  },
+  {
+    biomasse: number[][];
+    braunkohle: number[][];
+    erdgas: number[][];
+    kernenergie?: number[][];
+    photovoltaik?: number[][];
+    pumpspeicher?: number[][];
+    sonstigeErneuerbare?: number[][];
+    sonstigeKonventionelle?: number[][];
+    steinkohle?: number[][];
+    wasserkraft?: number[][];
+    windOffshore?: number[][];
+    windOnshore?: number[][];
+  }
+];
