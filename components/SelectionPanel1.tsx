@@ -1,13 +1,11 @@
 'use client'
 import { useDataCompContext } from "@/lib/provider/dataComparisonContext";
-import { useEffect } from "react";
-import SelectionPanel2 from "./SelectionPanel2";
 
 
 
 export default function SelectionPanel1() {
 
-  const { years, yearIsChecked, setYearIsChecked, groups, selectedGroup, setSelectedGroup
+  const { years, yearIsChecked, setYearIsChecked, groups, selectedGroup, setSelectedGroup, selectedCategory, categories, setSelectedCategory
   } = useDataCompContext();
 
   const handleChange = (index: number) => {
@@ -19,8 +17,6 @@ export default function SelectionPanel1() {
     );
   }
 
-
-
   return (
     <div className="panel1" >
       <form className="radio-form" >
@@ -28,12 +24,13 @@ export default function SelectionPanel1() {
           groups.map((group, index) => (
             <div key={index} >
               <input
+                className="radio"
                 type="radio"
                 name="group"
                 id={`group${index + 1}`}
                 value={groups[index]}
                 // checked={ } 
-                onChange={() => setSelectedGroup(groups[index])}
+                onChange={() => setSelectedGroup(group)}
               ></input>
               <label>{group}</label>
             </div>
@@ -41,27 +38,51 @@ export default function SelectionPanel1() {
         }
       </form>
       {
-        selectedGroup === 'Stromverbrauch' ? null : <SelectionPanel2 />
+        selectedGroup === 'Stromerzeugung' ?
+          <form className="radio-form" >
+            {
+              categories.map((category, index) => (
+                <div key={index} >
+                  <input
+                    className="radio"
+                    type="radio"
+                    name="group"
+                    id={`group${index + 1}`}
+                    value={category[index]}
+                    // checked={categoryChecked[index]}
+                    onChange={() => setSelectedCategory(category)}
+                  ></input>
+                  <label>{category}</label>
+                </div>
+              ))
+            }
+          </form>
+          : null
       }
-      <form className="ckeckbox-form" >
-        {
-          years.map((year, index) => (
-            <div key={year} >
-              <input
-                type="checkbox"
-                id={`check${index + 1}`}
-                name="year"
-                value={year}
-                checked={yearIsChecked[index]}
-                onChange={() => handleChange(index)}
-              ></input>
-              <label>{year}</label>
-            </div>
-          ))
-        }
-      </form>
+      {
+        (selectedGroup === 'Stromerzeugung' && selectedCategory.length > 0) ||
+          selectedGroup === 'Stromverbrauch' ?
+          < form className="ckeckbox-form" >
+            {
+              years.map((year, index) => (
+                <div key={year} >
+                  <input
+                    className="checkbox"
+                    type="checkbox"
+                    id={`check${index + 1}`}
+                    name="year"
+                    value={year}
+                    checked={yearIsChecked[index]}
+                    onChange={() => handleChange(index)}
+                  ></input>
+                  <label>{year}</label>
+                </div>
+              ))
+            }
+          </form>
+          : null
+      }
 
-
-    </div>
+    </div >
   )
 }

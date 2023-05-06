@@ -2,7 +2,7 @@ import { supabase } from "@/lib/helpers/supabaseClient";
 
 //
 
-export const getData = async (group: string, years: string[], dataName: string) => {
+export const fetchData = async (group: string, years: string[], dataName: string) => {
 
   let tableName: string;
   switch (group) {

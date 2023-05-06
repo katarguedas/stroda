@@ -18,10 +18,10 @@ export default function BarChart(
 
   const { years, yearIsChecked, setYearIsChecked, selectedGroup, setSelectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC } = useDataCompContext();
 
+
   // // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   const [selectedData, setSelectedData] = useState<SelectedState[]>([]);
-
 
 
   const clearYearIsChecked = () => {
@@ -168,4 +168,8 @@ export default function BarChart(
       />
     </div>
   )
+}
+
+function getItem(arg0: string): Alldata {
+  throw new Error("Function not implemented.");
 }
