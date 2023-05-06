@@ -1,17 +1,11 @@
 'use client'
 
 import { useDataCompContext } from "@/lib/provider/dataComparisonContext";
-import { useRef, useEffect, useState, SetStateAction } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official"
-import type { Alldata, Leistung, Stromverbrauch, Stromerzeugung } from "@/types/supabase-myTypes";
+import type { Alldata } from "@/types/supabase-myTypes";
 
-
-// type Props = {
-//   stromverbrauchData: Stromverbrauch;
-//   stromerzeugungData: Stromerzeugung;
-//   leistungData: Leistung;
-// }
 
 type SelectedState = {
   name: string;
@@ -20,31 +14,45 @@ type SelectedState = {
 
 export default function BarChart(
   allData: Alldata
-  // stromverbrauchData: number[][], 
-  // stromerzeugungData: Stromerzeugung, 
-  // leistungData: Leistung
 ) {
 
-  const { years, yearIsChecked, setYearIsChecked, selectedGroup, group, setGroup, categoryChecked, categoriesLC } = useDataCompContext();
+  const { years, yearIsChecked, setYearIsChecked, selectedGroup, setSelectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC } = useDataCompContext();
 
-  // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+  // // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   const [selectedData, setSelectedData] = useState<SelectedState[]>([]);
 
 
-  const getGroupString = (value: string): string => {
-    if (value === 'Stromverbrauch')
-      return 'stromverbrauch';
-    if (value === 'Stromerzeugung')
-      return 'stromerzeugung';
-    if (value === 'installierte Leistung')
-      return 'leistung';
-    return '';
+
+  const clearYearIsChecked = () => {
+    setYearIsChecked(
+      yearIsChecked.map((e, i) => {
+        if (e === true) e = !e;
+        return e;
+      }),
+    );
+  };
+
+  const resetYears = () => {
+    clearYearIsChecked();
+  }
+  const resetCategory = () => {
+    setSelectedCategory('');
+  }
+  const resetGroup = () => {
+    setSelectedGroup('');
   }
 
   useEffect(() => {
-    setGroup(getGroupString(selectedGroup))
-  }, [])
+    resetYears();
+    setSelectedData([])
+  }, [selectedCategory])
+
+  useEffect(() => {
+    resetYears();
+    resetCategory();
+    setSelectedData([])
+  }, [selectedGroup])
 
 
   const removeData = (year: string) => {
@@ -53,20 +61,7 @@ export default function BarChart(
     setSelectedData(selected);
   }
 
-
   useEffect(() => {
-    // const string = 'biomasse'
-    // const { ...gesamt } = allData;
-    // console.log("gesamt1: ", gesamt[0])
-    // console.log("gesamt2: ", gesamt[1])
-    // console.log("gesamt3: ", gesamt[2])
-
-    // console.log("teile von ges1:", allData[0].gesamt[0])
-    // console.log("teile von ges1:", allData[0]['gesamt'][0][0])
-
-    // console.log("teile von ges2:", allData[1][string][0][0])
-    // console.log("teile von ges2:", allData[1]['biomasse'][0]) 
-
     if (selectedGroup === 'Stromverbrauch') {
       years.map((year, index) => {
         if ((yearIsChecked[index]) && (!selectedData.find(e => e.name === year))) {
@@ -79,11 +74,15 @@ export default function BarChart(
       })
     } else if (selectedGroup === 'Stromerzeugung') {
       categoriesLC.map((category, i) => {
-        // const catString = 'biomasse';
         const catString = category;
-        if (categoryChecked[i]) {
+        console.log(category)
+        if (selectedCategory === categories[i]) {
+          console.log("Category: ", selectedCategory)
           years.map((year, index) => {
+            console.log("Jahr: ", year)
+            console.log("selectedData: ", selectedData)
             if ((yearIsChecked[index]) && (!selectedData.find(e => e.name === year))) {
+              console.log("READING: \n catString: ", catString, "index:", index)
               //@ts-ignore
               setSelectedData([...selectedData, { name: year, data: allData[1][catString][index] }])
             } else if (!yearIsChecked[index]) {
@@ -94,34 +93,30 @@ export default function BarChart(
           })
         }
       })
-
-      //
-    } else if (selectedGroup === 'installierte Leistung') {
       //
     }
 
+  }, [yearIsChecked, selectedGroup, selectedCategory])
 
-  }, [yearIsChecked, selectedGroup, categoryChecked])
-
-
-  const clearYearIsChecked = () => {
-    setYearIsChecked(
-      yearIsChecked.map((e, i) => {
-        if (e === true) e = !e;
-        return e;
-      }),
-    );
-  };
 
   useEffect(() => {
-    clearYearIsChecked();
-    setSelectedData([]);
-    console.log("checks: ", yearIsChecked)
-  }, [selectedGroup])
+    console.log("SelectedData:", selectedData)
+
+
+  }, [selectedData])
+
 
   const options = {
     chart: {
       type: "column"
+    },
+    title: {
+      text: selectedGroup,
+      fontSize: "18.0em"
+    },
+    subtitle: {
+      text: selectedCategory,
+      fontSize: '4.0em'
     },
     xAxis: {
       labels: {
@@ -130,13 +125,29 @@ export default function BarChart(
       categories:
         ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
       ,
-      tickLength: 1
-    },
-    yAxis: [
-      {
-        // max: 100
+      tickLength: 1,
+      style: {
+        fontSize: '1.5em'
       }
-    ],
+    },
+    yAxis: {
+      labels: {
+        enabled: true,
+        style: {
+          fontSize: '1.0em'
+        },
+        // formatter: function () {
+        //   return this.value / 1000000 + 'M';
+        // }
+      },
+
+      title: {
+        text: 'MWh',
+        style: {
+          fontSize: '1.5em'
+        }
+      }
+    },
     plotOptions: {
       series: {
         borderRadius: 3,

@@ -1,59 +1,33 @@
 'use client'
-import { useEffect } from "react";
 import { useDataCompContext } from "@/lib/provider/dataComparisonContext";
 
 
 
 export default function SelectionPanel2() {
 
-  const { selectedGroup, setSelectedGroup, categories, categoryChecked, setCategoryChecked, group } = useDataCompContext();
-
-
-  const clearCategoryCheck = () => {
-    setCategoryChecked(
-      categoryChecked.map((e, i) => {
-        if (e === true) e = !e;
-        return e;
-      })
-    );
-  };
-
-  const handleChange = (index: number) => {
-    setCategoryChecked(
-      categoryChecked.map(
-        (e, i) => { if (i === index) e = !e; return e }
-      )
-    );
-  }
-
-
-  useEffect(() => {
-    clearCategoryCheck()
-  }, [selectedGroup])
-
+  const {  categories, setSelectedCategory } = useDataCompContext();
 
 
   return (
     <div>
 
-      <form className="ckeckbox-form-categories" >
+      <form className="radio-form-categories" >
         {
           categories.map((category, index) => (
-            <div key={category} >
+            <div key={index} >
               <input
-                type="checkbox"
-                id={`check${index}`}
-                name="year"
-                value={category}
-                checked={categoryChecked[index]}
-                onChange={() => handleChange(index)}
+                type="radio"
+                name="group"
+                id={`group${index + 1}`}
+                value={category[index]}
+                // checked={categoryChecked[index]}
+                onChange={() => setSelectedCategory(category)}
               ></input>
               <label>{category}</label>
             </div>
           ))
         }
       </form>
-
     </div>
   )
 }

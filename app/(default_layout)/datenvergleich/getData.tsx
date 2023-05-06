@@ -8,13 +8,16 @@ export const getData = async (group: string, years: string[], dataName: string) 
   switch (group) {
     case "Stromverbrauch":
       tableName = 'Stromverbrauch';
+      // console.log("TableName:", tableName)
       break
     case "Stromerzeugung":
       tableName = 'Stromerzeugung_realisiert';
+      // console.log("TableName:", tableName)
       break;
-    case "installierte Leistung":
-      tableName = 'Leistung_installiert';
-      break;
+    // case "installierte Leistung":
+    //   tableName = 'Leistung_installiert';
+    //   console.log("TableName:", tableName)
+    //   break;
   }
 
 
@@ -43,7 +46,7 @@ export const getData = async (group: string, years: string[], dataName: string) 
 
       if (!data) {
         console.log("Keine Daten gefunden!")
-      } else if (tableName !== 'Leistung_installiert') {
+      } else {
         // console.log("Jahr:", years[i], "tableName: ", dataName)
         data.map((e, i) => {
           let tmp: string[];
@@ -78,7 +81,7 @@ export const getData = async (group: string, years: string[], dataName: string) 
       monthlyDataPerYear[i] = oneYear;
 
     }
-  } 
+  }
   // console.log("DATA:", monthlyDataPerYear)
   return monthlyDataPerYear;
 };

@@ -7,33 +7,22 @@ import SelectionPanel2 from "./SelectionPanel2";
 
 export default function SelectionPanel1() {
 
-  const { years, yearIsChecked, setYearIsChecked, groups, selectedGroup, setSelectedGroup, group
+  const { years, yearIsChecked, setYearIsChecked, groups, selectedGroup, setSelectedGroup
   } = useDataCompContext();
 
   const handleChange = (index: number) => {
     setYearIsChecked(
-      yearIsChecked.map(
-        (e, i) => { if (i === index) e = !e; return e }
-      )
+      yearIsChecked.map((e, i) => {
+        if (i === index) e = !e;
+        return e;
+      })
     );
   }
 
-  const clearYearIsChecked = () => {
-    setYearIsChecked(
-      yearIsChecked.map((e, i) => {
-        if (e === true) e = !e;
-        return e;
-      }),
-    );
-  };
-
-  useEffect(() => {
-    clearYearIsChecked()
-  }, [selectedGroup])
 
 
   return (
-    <div>
+    <div className="panel1" >
       <form className="radio-form" >
         {
           groups.map((group, index) => (
@@ -41,7 +30,7 @@ export default function SelectionPanel1() {
               <input
                 type="radio"
                 name="group"
-                id={group}
+                id={`group${index + 1}`}
                 value={groups[index]}
                 // checked={ } 
                 onChange={() => setSelectedGroup(groups[index])}
@@ -60,7 +49,7 @@ export default function SelectionPanel1() {
             <div key={year} >
               <input
                 type="checkbox"
-                id={`check${index}`}
+                id={`check${index + 1}`}
                 name="year"
                 value={year}
                 checked={yearIsChecked[index]}

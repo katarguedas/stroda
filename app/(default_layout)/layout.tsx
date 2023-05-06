@@ -1,3 +1,4 @@
+import '../../sass/style.scss';
 import Header from "@/components/Header"
 import React from "react";
 
