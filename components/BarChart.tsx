@@ -1,7 +1,7 @@
 'use client'
 
-import { useDataCompContext } from "@/lib/provider/dataComparisonContext";
-import { useRef, useEffect, useState } from 'react';
+import { useDataContext } from "@/lib/provider/dataContext";
+import { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official"
 import type { Alldata } from "@/types/supabase-myTypes";
@@ -16,7 +16,7 @@ export default function BarChart(
   allData: Alldata
 ) {
 
-  const { years, yearIsChecked, setYearIsChecked, selectedGroup, setSelectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC } = useDataCompContext();
+  const { yearIsChecked, setYearIsChecked, selectedGroup, setSelectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC, years } = useDataContext();
 
 
   // // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
@@ -168,8 +168,4 @@ export default function BarChart(
       />
     </div>
   )
-}
-
-function getItem(arg0: string): Alldata {
-  throw new Error("Function not implemented.");
 }

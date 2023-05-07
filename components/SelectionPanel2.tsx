@@ -1,26 +1,73 @@
 'use client'
-import { useDataCompContext } from "@/lib/provider/dataComparisonContext";
-import { useStaticDataContext } from "@/lib/provider/staticDataProvider";
-
-
+import { useDataContext } from "@/lib/provider/dataContext";
+import StrodaDatePicker from "./StrodaDatePicker";
+import { useEffect } from "react";
+//.......................
 
 export default function SelectionPanel2() {
 
-  const {  yearIsChecked, setYearIsChecked, selectedGroup, setSelectedGroup, selectedCategory, setSelectedCategory
-  } = useDataCompContext();
-  const { years, groups, categories } =useStaticDataContext();
+  const { groups, selectedGroup, setSelectedGroup, categories, setSelectedCategory, categoryChecked, setCategoryChecked, firstDate, setFirstDate, lastDate, setLastDate, showChart, setShowChart, setSearchedCategory
+  } = useDataContext();
 
-  const handleChange = (index: number) => {
-    setYearIsChecked(
-      yearIsChecked.map((e, i) => {
+  //.......................
+
+  useEffect(() => {
+    setSelectedGroup('')
+  }, [])
+
+
+  useEffect(() => {
+    console.log("first Day: ", firstDate)
+  }, [firstDate])
+  useEffect(() => {
+    console.log("last Day: ", lastDate)
+  }, [lastDate])
+
+  useEffect(() => {
+    console.log("SelectedGroup ist: ", selectedGroup)
+    if (selectedGroup === 'Stromverbrauch') {
+      setSearchedCategory('Gesamt')
+    }
+    if (selectedGroup === 'Stromverbrauch' || categoryChecked.includes(true)) {
+      setShowChart(true);
+    }
+  }, [selectedGroup, categoryChecked])
+
+
+  //.......................
+
+  const handleCheckbox = (index: number) => {
+    console.log("Temporär gesetzt:", categories[index])
+    setSearchedCategory(categories[index])
+    setCategoryChecked(
+      categoryChecked.map((e, i) => {
         if (i === index) e = !e;
         return e;
       })
     );
   }
 
+  //.......................
+
+  const handleStartDate = (date: Date) => {
+    setFirstDate(date);
+  }
+  const handleEndDate = (date: Date) => {
+    setLastDate(date);
+  }
+
   return (
-    <div className="panel1" >
+    <div className="panel2" >
+      <div className="datePicker-wrapper" >
+        <StrodaDatePicker
+          handleChange={handleStartDate}
+          selected={firstDate}
+        />
+        <StrodaDatePicker
+          handleChange={handleEndDate}
+          selected={lastDate}
+        />
+      </div>
       <form className="radio-form" >
         {
           groups.map((group, index) => (
@@ -41,18 +88,18 @@ export default function SelectionPanel2() {
       </form>
       {
         selectedGroup === 'Stromerzeugung' ?
-          <form className="radio-form" >
+          <form className="ckeckbox-form" >
             {
               categories.map((category, index) => (
-                <div key={index} >
+                <div key={index} style={{ display: "flex", flexDirection: 'row' }} >
                   <input
-                    className="radio"
-                    type="radio"
+                    className="checkbox"
+                    type="checkbox"
                     name="group"
-                    id={`group${index + 1}`}
-                    value={category[index]}
+                    id={`check${index + 1}`}
+                    value={category}
                     // checked={categoryChecked[index]}
-                    onChange={() => setSelectedCategory(category)}
+                    onChange={() => handleCheckbox(index)}
                   ></input>
                   <label>{category}</label>
                 </div>
@@ -61,29 +108,7 @@ export default function SelectionPanel2() {
           </form>
           : null
       }
-      {
-        (selectedGroup === 'Stromerzeugung' && selectedCategory.length > 0) ||
-          selectedGroup === 'Stromverbrauch' ?
-          < form className="ckeckbox-form" >
-            {
-              years.map((year, index) => (
-                <div key={year} >
-                  <input
-                    className="checkbox"
-                    type="checkbox"
-                    id={`check${index + 1}`}
-                    name="year"
-                    value={year}
-                    checked={yearIsChecked[index]}
-                    onChange={() => handleChange(index)}
-                  ></input>
-                  <label>{year}</label>
-                </div>
-              ))
-            }
-          </form>
-          : null
-      }
+
 
     </div >
   )

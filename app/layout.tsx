@@ -3,6 +3,7 @@ import { Hind, Lora } from 'next/font/google';
 
 import Footer from '@/components/Footer';
 
+
 /*****************
  * metadata
  */

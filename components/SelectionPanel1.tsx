@@ -1,12 +1,18 @@
 'use client'
-import { useDataCompContext } from "@/lib/provider/dataComparisonContext";
+import { useDataContext } from "@/lib/provider/dataContext";
+import { useEffect } from "react";
 
 
 
 export default function SelectionPanel1() {
 
   const { years, yearIsChecked, setYearIsChecked, groups, selectedGroup, setSelectedGroup, selectedCategory, categories, setSelectedCategory
-  } = useDataCompContext();
+  } = useDataContext();
+
+
+  useEffect(() => {
+    setSelectedGroup('')
+  }, [])
 
   const handleChange = (index: number) => {
     setYearIsChecked(

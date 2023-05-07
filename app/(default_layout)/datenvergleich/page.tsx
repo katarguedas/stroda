@@ -1,34 +1,31 @@
 
 import BarChart from "@/components/BarChart";
 import SelectionPanel1 from "@/components/SelectionPanel1"
-import { DataCompContextProvider } from "@/lib/provider/dataComparisonContext"
+import { DataContextProvider } from "@/lib/provider/dataContext"
 import getData from "./getData";
 
 
 export default async function DatenvergleichPage() {
 
 
-  const allData = await getData();
-  // const allData: Alldata;
+  // const allData = await getData();
+
+
 
 
   return (
     <div>
-
-      <DataCompContextProvider >
-        <div className="content" >
-
-          <SelectionPanel1 />
-          <div  >
-            <BarChart
-              {...allData}
-            />
-          </div>
-
-          <br></br>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore delectus consequatur rerum! Numquam modi, id reici
+      <div className="content" >
+        <SelectionPanel1 />
+        <div>
+          <BarChart
+          // {...allData}
+          />
         </div>
-      </DataCompContextProvider >
+
+        <br></br>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore delectus consequatur rerum! Numquam modi, id reici
+      </div>
     </div >
   )
 }

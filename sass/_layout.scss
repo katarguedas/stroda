@@ -13,6 +13,13 @@ main{
   margin-right: 5rem;
 }
 
+header {
+  margin: 1.0rem;
+}
+header h3 {
+  margin:0.5rem;
+}
+
 .site-wrapper {
   display: flex;
   flex-direction: column;
@@ -21,7 +28,7 @@ main{
 
 .landingpage-header {
   // min-height: 200px;
-  height: 35vh;
+  height: 70vh;
   display: flex;
   
   color: white;
@@ -32,6 +39,8 @@ main{
 
 .header-title {
 margin-left: 1.0rem;
+padding: 0.75rem 1.5rem;
+background-color: rgba(198, 227, 253, 0.5);
 }
 
 .site-content {
@@ -45,9 +54,6 @@ margin-left: 1.0rem;
   background-color: var(--footer-background);
 }
 
-
-
-
 .checkboxForm {
   margin: 0.5rem;
 }
@@ -56,3 +62,8 @@ margin-left: 1.0rem;
   display: flex;
   flex-direction: column;
 }
+
+.chart {
+  width: 50%;
+}
+

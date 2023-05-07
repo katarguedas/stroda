@@ -1,8 +1,9 @@
 .ckeckbox-form {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1.5rem;
-  margin: 1.5rem;
+  margin: 1.0rem;
   font-family: var(--font-hind);
 }
 
@@ -10,15 +11,16 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  margin: 1.5rem;
+  gap: 1.0rem;
+  margin: 1.0rem;
   font-family: var(--font-hind);
 
 }
 
-.panel1 {
+.panel1 .panel2 {
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
 .radio {
@@ -32,3 +34,18 @@
   height: 0.75em;
   width: 0.75em;
 }
+
+.datePicker-wrapper {
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  padding: 0.25rem 1.0rem;
+  justify-content: start;
+}
+
+// .react-datepicker-wrapper,
+// .react-datepicker__input-container,
+// .react-datepicker__input-container input {
+//     display: flex;
+//     width: 100%;
+// }

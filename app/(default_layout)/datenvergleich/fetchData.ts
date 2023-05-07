@@ -4,21 +4,9 @@ import { supabase } from "@/lib/helpers/supabaseClient";
 
 export const fetchData = async (group: string, years: string[], dataName: string) => {
 
-  let tableName: string;
-  switch (group) {
-    case "Stromverbrauch":
-      tableName = 'Stromverbrauch';
-      // console.log("TableName:", tableName)
-      break
-    case "Stromerzeugung":
-      tableName = 'Stromerzeugung_realisiert';
-      // console.log("TableName:", tableName)
-      break;
-    // case "installierte Leistung":
-    //   tableName = 'Leistung_installiert';
-    //   console.log("TableName:", tableName)
-    //   break;
-  }
+  let tableName = '';
+  if (group === 'Stromverbrauch') tableName = 'Stromverbrauch';
+  else if (group === 'Stromerzeugung') tableName = 'Stromverbrauch';
 
 
   let monthlyDataPerYear: number[][] = new Array(years.length).fill(new Array(12))

@@ -1,6 +1,7 @@
 import '../../sass/style.scss';
 import Header from "@/components/Header"
 import React from "react";
+import { DataContextProvider } from '@/lib/provider/dataContext';
 
 
 type Props = {
@@ -12,7 +13,9 @@ export default function layout({ children }: Props) {
   return (
     <div>
       <Header />
-      {children}
+      <DataContextProvider >
+        {children}
+      </DataContextProvider>
     </div>
   )
 }

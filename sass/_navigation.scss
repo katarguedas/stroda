@@ -28,18 +28,10 @@ a {
   color: rblueed;
 }
 
-// .startlink {
-//   padding: 1.0rem;
-//   border: 1px solid black;
-//   border-radius: 0.5rem;
-//   text-decoration: none;
-//   align-items: center;
-// }
-
 .startlink {
-	box-shadow:inset 0px 1px 0px 0px #54a3f7;
-	background:linear-gradient(to bottom, #69a1bf 5%, #216ea5 80%);
-	background-color:#007dc1;
+	box-shadow:inset 0px 1px 0px 0px #a5b2c0;
+	background:linear-gradient(to bottom, #69a1bf 5%, #3270af 80%);
+	background-color:#006ac1;
 	border-radius:0.5rem;
 	border:1px solid #124d77;
 	display:inline-block;
@@ -52,14 +44,15 @@ a {
 	text-shadow:0px 1px 0px #204b7f;
 }
 .startlink:hover {
-	background:linear-gradient(to bottom, #1265a0 5%, #49b3ec 80%);
-	background-color:#0061a7;
+	background:linear-gradient(to bottom, #487b97 5%, #225a93 80%);
+	background-color:#024983;
   color: #fff;
 }
 .startlink:active {
+  background:linear-gradient(to bottom, #38831e 5%, #7dc665 90%);
 	position:relative;
 	top:1px;
-  color: #043047;
+  color: #bedcb4;
 }
 
 // $mobile-menu-max: rem(500);
