@@ -13,6 +13,7 @@ a {
   text-decoration: none;
 }
 
+
 .navigation {
   margin: 1.0rem;
   text-transform: uppercase;
@@ -30,7 +31,7 @@ a {
 
 .startlink {
 	box-shadow:inset 0px 1px 0px 0px #a5b2c0;
-	background:linear-gradient(to bottom, #69a1bf 5%, #3270af 80%);
+	background:linear-gradient(to bottom, #69a1bf 5%, #3c6c9b 80%);
 	background-color:#006ac1;
 	border-radius:0.5rem;
 	border:1px solid #124d77;
@@ -40,11 +41,12 @@ a {
 	font-family:Arial;
 	font-size:1.5rem;
 	padding:0.75rem 2rem;
+  margin: 0.5rem 2.0rem;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #204b7f;
 }
 .startlink:hover {
-	background:linear-gradient(to bottom, #487b97 5%, #225a93 80%);
+	background:linear-gradient(to bottom, #487b97 5%, #315e8b 80%);
 	background-color:#024983;
   color: #fff;
 }
@@ -54,6 +56,7 @@ a {
 	top:1px;
   color: #bedcb4;
 }
+
 
 // $mobile-menu-max: rem(500);
 

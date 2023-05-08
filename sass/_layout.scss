@@ -74,14 +74,24 @@ background-color: rgba(198, 227, 253, 0.5);
 .overview-site {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 90%;
   align-items: center;
 }
 
 button {
   margin: 1.0rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1.0rem;
   background-color: var(--celadon-blue);
+	background:linear-gradient(to bottom, #4586aa 5%, #3270af 80%);
+
+  border-radius: 0.5rem;
+  color: #fff;
+  .button:active {
+    background:linear-gradient(to bottom, #38831e 5%, #7dc665 90%);
+    position:relative;
+    top:1px;
+    color: #bedcb4;
+  }
 }
 
 
