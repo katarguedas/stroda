@@ -12,10 +12,13 @@
   --black: hsl(0 10% 6%);
   --darkslategray: #2F4F4F;
   --background: #edf7ff;
+  --site-title-color: #1f7839;
+  --background-header: #c9e5fc;
   --bg-footer-color: #93baba;
 
   // Variablennamen zum Beschreiben der Funktion
   --background-color: var(--background);
+  --background-color-header: var(--background-header);
   --text-color: var(--darkslategray);
   --heading-color: var(--imperial-red);
   --link-color: var(--imperial-red);

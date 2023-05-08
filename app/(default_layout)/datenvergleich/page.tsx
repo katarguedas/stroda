@@ -16,6 +16,7 @@ export default async function DatenvergleichPage() {
   return (
     <div>
       <div className="content" >
+        <p className="site-title" >Datenvergleich</p>
         <SelectionPanel1 />
         <div>
           <BarChart

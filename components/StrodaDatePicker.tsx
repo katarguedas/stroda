@@ -17,8 +17,6 @@ type Props = {
 const StrodaDatePicker = ({ handleChange, selected }: Props) => {
 
   const { lastDay } = useDataContext();
-  const [startDate, setStartDate] = useState(new Date());
-
 
   return (
     <DatePicker
@@ -27,7 +25,6 @@ const StrodaDatePicker = ({ handleChange, selected }: Props) => {
       selected={selected}
       onChange={handleChange}
       maxDate={(new Date(lastDay))}
-      placeholderText="Select a date before 5 days in the future"
     />
   );
 };

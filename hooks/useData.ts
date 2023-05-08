@@ -5,11 +5,10 @@ import {
   getDateString,
   calcTimestamp,
   formatValue,
-  getDateValues,
 } from '@/lib/helpers/fetchDataHelper';
 
 const useData = () => {
-  const { selectedGroup, firstDate, lastDate, searchedCategory } =
+  const { selectedGroup, firstDate, lastDate, categoryChecked, categories } =
     useDataContext();
 
   const fetchTimeSeriesData = async () => {
@@ -20,11 +19,9 @@ const useData = () => {
     if (selectedGroup === 'Stromverbrauch') tableName = 'Stromverbrauch';
     else if (selectedGroup === 'Stromerzeugung')
       tableName = 'Stromerzeugung_realisiert';
-    console.log(tableName);
+    console.log('tableName', tableName);
 
     //------------
-
-    console.log('first date:', new Date(firstDate));
 
     const firstDateString = getDateString(firstDate);
     const lastDateString = getDateString(lastDate);
@@ -42,7 +39,6 @@ const useData = () => {
       }
     } catch (error) {
       console.log('error', error);
-      throw new Error('Gewünschte Daten nicht gefunden.');
     }
     try {
       const searchedData2 = await supabase
@@ -57,38 +53,66 @@ const useData = () => {
       }
     } catch (error) {
       console.log('error', error);
-      throw new Error('Gewünschte Daten nicht gefunden.');
     }
+    console.log('IDs????', lastId, firstId);
     //
     let array = [firstId.toString()];
     for (let i = firstId + 1; i < lastId + 1; i++) {
       array.push(i.toString());
     }
-
     //-----
 
-    let chartData: number[][] = new Array(array.length).fill(new Array(2));
+    let allData: number[][][] = [];
 
-    console.log('Category: ', searchedCategory);
     try {
       const data = await supabase.from(tableName).select().in('id', array);
-      console.log('länge', chartData.length);
 
       if (!data.data) {
         console.log('Keine Daten gefunden!');
       } else {
-        data.data.map((e, i) => {
-          const timestamp = calcTimestamp(e.Datum, e.Anfang);
-          const value = formatValue(e[searchedCategory]);
-          chartData[i] = [timestamp, value];
-        });
+        if (selectedGroup === 'Stromerzeugung') {
+          categories.map((category, index) => {
+            let oneCat: number[][] = [];
+            // console.log('KATEGORIE', category, 'index:', index);
+            data.data.map((e, i) => {
+              const timestamp = calcTimestamp(e.Datum, e.Anfang);
+              let value: number;
+              try {
+                value = formatValue(e[category]);
+              } catch (error) {
+                // console.log('ERROR!;', category, index);
+                value = 0;
+              }
+              oneCat.push([timestamp, value]);
+            });
+            allData.push(oneCat);
+          });
+        } else if (selectedGroup === 'Stromverbrauch') {
+          let oneCat: number[][] = [];
+          console.log('KATEGORIE: Gesamt');
+          data.data.map((e, i) => {
+            const timestamp = calcTimestamp(e.Datum, e.Anfang);
+            const value = formatValue(e['Gesamt']);
+            oneCat.push([timestamp, value]);
+          });
+          allData.push(oneCat);
+        }
+
+        console.log('ALL DATA:.....', allData);
       }
     } catch (error) {
-      console.log('error', error);
-      throw new Error('Gewünschte Daten nicht gefunden.');
+      // console.log('hmmm', tableName, array);
+      // console.log('error', error);
+      // throw new Error('Gewünschte Daten nicht gefunden.');
     }
-    return chartData;
+
+    return allData;
+
+    // });
   };
+
+  //-----------------------------
+
   return [fetchTimeSeriesData];
 };
 

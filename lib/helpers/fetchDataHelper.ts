@@ -1,3 +1,7 @@
+
+
+
+
 //---------
 export const getDateString = (date: Date) => {
   if (date) {
@@ -55,13 +59,16 @@ export const formatValue = (valueString: string) => {
 
   if (valueString.includes('.')) {
     tmp = valueString.split('.');
+    if (tmp[1].length < 3) {
+      tmp[1] = tmp[1].padEnd(3, '0'); // Daten enthalten '.' als Tatusendertrennzeichen. Beim importieren in Supabase wird Eine '0' am Ende gelöscht(Bsp: aus 45.450 wird 45.45). Daher muss die Null zur richtigen darstellung der Zahl wieder hinzugefügt werden.
+    }
     const str = tmp[0].concat(tmp[1]);
     if (str.includes(',')) {
       tmp = str.split(',');
       const string = tmp[0].concat('.').concat(tmp[1]);
       return parseFloat(string);
     } else {
-      return 0;
+      return parseFloat(str);
     }
   } else {
     if (valueString.includes(',')) {
@@ -69,6 +76,6 @@ export const formatValue = (valueString: string) => {
       const string = tmp[0].concat('.').concat(tmp[1]);
       return parseFloat(string);
     }
-    return 0;
+    return parseFloat(valueString);
   }
 };

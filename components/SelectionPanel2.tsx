@@ -15,7 +15,6 @@ export default function SelectionPanel2() {
     setSelectedGroup('')
   }, [])
 
-
   useEffect(() => {
     console.log("first Day: ", firstDate)
   }, [firstDate])
@@ -30,6 +29,8 @@ export default function SelectionPanel2() {
     }
     if (selectedGroup === 'Stromverbrauch' || categoryChecked.includes(true)) {
       setShowChart(true);
+    } else {
+      // setShowChart(false)
     }
   }, [selectedGroup, categoryChecked])
 
@@ -37,7 +38,6 @@ export default function SelectionPanel2() {
   //.......................
 
   const handleCheckbox = (index: number) => {
-    console.log("Temporär gesetzt:", categories[index])
     setSearchedCategory(categories[index])
     setCategoryChecked(
       categoryChecked.map((e, i) => {

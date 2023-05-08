@@ -8,8 +8,9 @@ export default function ZeitverlaufPage() {
   return (
     <div>
       <div className="content" >
+        <p className="site-title" >Zeitverlauf</p>
         <SelectionPanel2 />
-        <TimeSeriesChart  />
+        <TimeSeriesChart />
       </div>
 
     </div>

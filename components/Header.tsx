@@ -10,6 +10,7 @@ export default function Header() {
       <a className="home-link" href="/"><RiHome3Line /></a>
       <h3>Stromdaten-Viewer Deutschland</h3>
       <Navigation />
+      <hr></hr>
     </header>
   )
 }
