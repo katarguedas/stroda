@@ -14,7 +14,8 @@ export default function BarChartYearlyData(
 
   // // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
-  const years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'];
+  const wholeYears = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
+  const name = 'Stromverbrauch';
 
   console.log(title, subtitle)
   console.log(data)
@@ -25,21 +26,31 @@ export default function BarChartYearlyData(
     },
     title: {
       text: title,
-      fontSize: "18.0em"
+      style: {
+        fontSize: '1.5em'
+      }
     },
     subtitle: {
       text: subtitle,
-      fontSize: '4.0em'
+      style: {
+        fontSize: '0.9em'
+      }
+    },
+    legend: {
+      enabled: false,
+      itemStyle: {
+        fontSize: '1.25rem'
+      }
     },
     xAxis: {
       labels: {
         enabled: true,
+        style: {
+          fontSize: '1.1em'
+        }
       },
-      // categories: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+      categories: wholeYears,
       tickLength: 1,
-      style: {
-        fontSize: '1.5em'
-      }
     },
     yAxis: {
       labels: {
@@ -65,7 +76,10 @@ export default function BarChartYearlyData(
         groupPadding: 0.05,
       }
     },
-    series: data
+    series: {
+      name: '',
+      data: data
+    }
   };
 
   return (

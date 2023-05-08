@@ -1,7 +1,6 @@
 
 
 
-
 //---------
 export const getDateString = (date: Date) => {
   if (date) {
@@ -9,7 +8,6 @@ export const getDateString = (date: Date) => {
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const yyyy = String(date.getFullYear());
     const dateString = dd.concat('.').concat(mm).concat('.').concat(yyyy);
-    console.log('mein DateString', date);
     return dateString;
   } else return null;
 };

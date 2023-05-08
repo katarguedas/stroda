@@ -7,8 +7,6 @@ registerLocale("de", de)
 
 import "react-datepicker/dist/react-datepicker.css";
 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 type Props = {
   handleChange: (date: Date) => void;

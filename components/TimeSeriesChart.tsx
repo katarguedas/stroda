@@ -35,7 +35,6 @@ export default function TimeSeriesChart() {
   const getChartData = () => {
 
     const checkData = (name: string) => {
-      console.log("NAME der kategorie:", name)
       const index = chartData.findIndex(e => e.name === name);
       if (index > -1)
         return true
@@ -50,8 +49,6 @@ export default function TimeSeriesChart() {
 
         categories.map((category, index) => {
           if ((categoryChecked[index]) && (checkData(category) === false)) {
-            console.log("---INDEX:---", index)
-            console.log("Kategorie: ", category, "DATA:", fetchedData[index])
             setChartData([...chartData, { name: category, type: 'line', data: fetchedData[index] }])
           } else if ((!categoryChecked[index]) && (checkData(category) === true)) {
             removeData(category);
@@ -61,39 +58,12 @@ export default function TimeSeriesChart() {
     }
   }
 
-  // const getChartData = () => {
-  //   if (fetchedData) {
-  //     if (selectedGroup === 'Stromerzeugung') {
-  //       categoryChecked.map((e, i) => {
-  //         if (e === true) {
-  //           console.log(e)
-  //           console.log("Kategorie zum Plotten:", categories[i])
-  //           console.log("INDEX:", i)
-  //           setChartData([...chartData,
-  //           { name: categories[i], type: 'line', data: fetchedData[i] }]);
-  //         } else if (e === false) {
-  //           console.log("INDEX von 'false'", i, e)
-  //           console.log(chartData)
-  //           console.log(categories[i], chartData.findIndex((e, i) => e.name === categories[i]))
-  //           if (chartData.findIndex((e, i) => e.name === categories[i]) !== -1) {
-  //             console.log("GEFUNDEN IN DEN DATEN", chartData.findIndex((e, i) => e.name === categories[i]))
-  //             removeChartData(categories[chartData.findIndex((e, i) => e.name === categories[i])]);
-  //           }
-  //         }
-  //       });
-  //     } else if (selectedGroup === 'Stromverbrauch') {
-  //       setChartData([{ name: 'Stromverbrauch gesamt', type: 'line', data: fetchedData[0] }])
-  //     }
-  //   }
-  // }
-
   const fetchData = async () => {
     const dat = await fetchTimeSeriesData();
     setFetchedData(dat);
   }
 
   useEffect(() => {
-    console.log("FetchedDATA;", fetchedData)
     getChartData();
   }, [fetchedData])
 
@@ -114,20 +84,7 @@ export default function TimeSeriesChart() {
   };
 
 
-  // useEffect(() => {
-  //   if (showChart) {
-  //     getChartData();
-  //   }
-  // }, [showChart])
-
   useEffect(() => {
-    if (chartData)
-      console.log("geladene Daten", chartData)
-  }, [chartData])
-
-
-  useEffect(() => {
-    console.log("CATEGORY CHECKED:", categoryChecked)
     getChartData();
   }, [categoryChecked])
 
@@ -146,20 +103,15 @@ export default function TimeSeriesChart() {
     if (selectedGroup === 'Stromverbrauch') {
       setChartData([]);
       setShowChart(false);
-      // setSearchedCategory('Gesamt');
       reloadStromverbrauch();
     }
   }, [selectedGroup])
-
-
-  //------------------------------
-
 
   //...............................
 
   const options = {
     chart: {
-      type: "line"
+      type: "line",
     },
     title: {
       text: selectedGroup,
@@ -167,11 +119,37 @@ export default function TimeSeriesChart() {
     subtitle: {
       text: '...',
     },
+    plotOptions: {
+      spline: {
+        lineWidth: 2,
+        states: {
+          hover: {
+            lineWidth: 3
+          }
+        },
+        // marker: {
+        //   enabled: false
+        // },
+      },
+    },
+    legend: {
+      itemStyle: {
+        fontSize: '1.15rem'
+      }
+    },
     yAxis: {
+      type: 'linear',
       title: {
         text: 'MWh',
         style: {
-          fontSize: '1.5em'
+          fontSize: '1.25em'
+        }
+      },
+      label: {
+        enabled: true,
+        format: 'Value: {point.y:.2f}',
+        style: {
+          fontSize: '1.5rem'
         }
       }
     },

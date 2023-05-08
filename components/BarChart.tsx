@@ -16,13 +16,12 @@ export default function BarChart(
   allData: Alldata
 ) {
 
-  const { yearIsChecked, setYearIsChecked, selectedGroup, setSelectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC, years } = useDataContext();
+  const { yearIsChecked, setYearIsChecked, selectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC, years } = useDataContext();
 
 
   // // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   const [selectedData, setSelectedData] = useState<SelectedState[]>([]);
-
 
   const clearYearIsChecked = () => {
     setYearIsChecked(
@@ -38,9 +37,6 @@ export default function BarChart(
   }
   const resetCategory = () => {
     setSelectedCategory('');
-  }
-  const resetGroup = () => {
-    setSelectedGroup('');
   }
 
   useEffect(() => {
@@ -118,23 +114,29 @@ export default function BarChart(
       text: selectedCategory,
       fontSize: '4.0em'
     },
+    legend: {
+      enabled: true,
+      itemStyle: {
+        fontSize: '1.2rem'
+      }
+    },
     xAxis: {
       labels: {
         enabled: true,
+        style: {
+          fontSize: '1.25em'
+        }
       },
       categories:
-        ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
-      ,
+        ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
       tickLength: 1,
-      style: {
-        fontSize: '1.5em'
-      }
+
     },
     yAxis: {
       labels: {
         enabled: true,
         style: {
-          fontSize: '1.0em'
+          fontSize: '1.1em'
         },
         // formatter: function () {
         //   return this.value / 1000000 + 'M';

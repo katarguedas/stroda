@@ -71,7 +71,17 @@ background-color: rgba(198, 227, 253, 0.5);
   flex-direction: column;
 }
 
-.chart {
-  width: 50%;
+.overview-site {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-items: center;
 }
+
+button {
+  margin: 1.0rem;
+  padding: 0.5rem;
+  background-color: var(--celadon-blue);
+}
+
 

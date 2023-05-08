@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function SelectionPanel2() {
 
-  const { groups, selectedGroup, setSelectedGroup, categories, setSelectedCategory, categoryChecked, setCategoryChecked, firstDate, setFirstDate, lastDate, setLastDate, showChart, setShowChart, setSearchedCategory
+  const { groups, selectedGroup, setSelectedGroup, categories, categoryChecked, setCategoryChecked, firstDate, setFirstDate, lastDate, setLastDate, setShowChart, setSearchedCategory
   } = useDataContext();
 
   //.......................
@@ -15,23 +15,14 @@ export default function SelectionPanel2() {
     setSelectedGroup('')
   }, [])
 
-  useEffect(() => {
-    console.log("first Day: ", firstDate)
-  }, [firstDate])
-  useEffect(() => {
-    console.log("last Day: ", lastDate)
-  }, [lastDate])
 
   useEffect(() => {
-    console.log("SelectedGroup ist: ", selectedGroup)
     if (selectedGroup === 'Stromverbrauch') {
       setSearchedCategory('Gesamt')
     }
     if (selectedGroup === 'Stromverbrauch' || categoryChecked.includes(true)) {
       setShowChart(true);
-    } else {
-      // setShowChart(false)
-    }
+    } 
   }, [selectedGroup, categoryChecked])
 
 

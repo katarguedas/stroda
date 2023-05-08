@@ -1,7 +1,6 @@
 
 import { RiHome3Line } from "react-icons/ri";
 //
-import Link from "next/link";
 import Navigation from "./Navigation";
 
 export default function Header() {

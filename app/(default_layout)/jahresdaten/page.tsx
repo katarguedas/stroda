@@ -1,26 +1,22 @@
 
 import BarChart from "@/components/BarChart";
 import SelectionPanel1 from "@/components/SelectionPanel1"
-import { DataContextProvider } from "@/lib/provider/dataContext"
-import getData from "./getData";
+import GetData from "./getData";
 
 
-export default async function DatenvergleichPage() {
+export default async function JahresdatenPage() {
 
-
-  // const allData = await getData();
-
-
-
+  const allData = await GetData();
+  // console.log("ALL DATA:", allData)
 
   return (
     <div>
       <div className="content" >
-        <p className="site-title" >Datenvergleich</p>
+        <p className="site-title" >Jahresbetrachtung</p>
         <SelectionPanel1 />
         <div>
           <BarChart
-          // {...allData}
+            {...allData}
           />
         </div>
 

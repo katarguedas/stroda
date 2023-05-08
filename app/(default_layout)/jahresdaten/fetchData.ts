@@ -1,5 +1,4 @@
 import { supabase } from '@/lib/helpers/supabaseClient';
-
 //
 
 export const fetchData = async (
@@ -9,7 +8,7 @@ export const fetchData = async (
 ) => {
   let tableName = '';
   if (group === 'Stromverbrauch') tableName = 'Stromverbrauch';
-  else if (group === 'Stromerzeugung') tableName = 'Stromverbrauch';
+  else if (group === 'Stromerzeugung') tableName = 'Stromerzeugung_realisiert';
 
   let monthlyDataPerYear: number[][] = new Array(years.length).fill(
     new Array(12)
@@ -36,11 +35,9 @@ export const fetchData = async (
       if (!data) {
         console.log('Keine Daten gefunden!');
       } else {
-        // console.log("Jahr:", years[i], "tableName: ", dataName)
         data.map((e, i) => {
           let tmp: string[];
           const val = e[dataName] as string;
-
           if (val.includes('.')) {
             tmp = val.split('.');
             if (tmp[1].length < 3) {
@@ -73,6 +70,5 @@ export const fetchData = async (
       monthlyDataPerYear[i] = oneYear;
     }
   }
-  // console.log("DATA:", monthlyDataPerYear)
   return monthlyDataPerYear;
 };

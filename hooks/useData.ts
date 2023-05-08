@@ -19,7 +19,6 @@ const useData = () => {
     if (selectedGroup === 'Stromverbrauch') tableName = 'Stromverbrauch';
     else if (selectedGroup === 'Stromerzeugung')
       tableName = 'Stromerzeugung_realisiert';
-    console.log('tableName', tableName);
 
     //------------
 
@@ -54,7 +53,6 @@ const useData = () => {
     } catch (error) {
       console.log('error', error);
     }
-    console.log('IDs????', lastId, firstId);
     //
     let array = [firstId.toString()];
     for (let i = firstId + 1; i < lastId + 1; i++) {
@@ -73,14 +71,12 @@ const useData = () => {
         if (selectedGroup === 'Stromerzeugung') {
           categories.map((category, index) => {
             let oneCat: number[][] = [];
-            // console.log('KATEGORIE', category, 'index:', index);
             data.data.map((e, i) => {
               const timestamp = calcTimestamp(e.Datum, e.Anfang);
               let value: number;
               try {
                 value = formatValue(e[category]);
               } catch (error) {
-                // console.log('ERROR!;', category, index);
                 value = 0;
               }
               oneCat.push([timestamp, value]);
@@ -89,7 +85,6 @@ const useData = () => {
           });
         } else if (selectedGroup === 'Stromverbrauch') {
           let oneCat: number[][] = [];
-          console.log('KATEGORIE: Gesamt');
           data.data.map((e, i) => {
             const timestamp = calcTimestamp(e.Datum, e.Anfang);
             const value = formatValue(e['Gesamt']);
@@ -98,11 +93,10 @@ const useData = () => {
           allData.push(oneCat);
         }
 
-        console.log('ALL DATA:.....', allData);
+        // console.log('ALL DATA:.....', allData);
       }
     } catch (error) {
-      // console.log('hmmm', tableName, array);
-      // console.log('error', error);
+      console.log('error', error);
       // throw new Error('Gewünschte Daten nicht gefunden.');
     }
 
