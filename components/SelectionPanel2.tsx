@@ -22,9 +22,18 @@ export default function SelectionPanel2() {
     }
     if (selectedGroup === 'Stromverbrauch' || categoryChecked.includes(true)) {
       setShowChart(true);
-    } 
+    }
   }, [selectedGroup, categoryChecked])
 
+
+  const clearcategoryChecked = () => {
+    setCategoryChecked(
+      categoryChecked.map((e, i) => {
+        if (e === true) e = !e;
+        return e;
+      }),
+    );
+  };
 
   //.......................
 
@@ -47,6 +56,12 @@ export default function SelectionPanel2() {
     setLastDate(date);
   }
 
+  const handleClick = () => {
+    setShowChart(true);
+    setSelectedGroup('');
+    clearcategoryChecked();
+  }
+
   return (
     <div className="panel2" >
       <div className="datePicker-wrapper" >
@@ -58,6 +73,7 @@ export default function SelectionPanel2() {
           handleChange={handleEndDate}
           selected={lastDate}
         />
+        <button onClick={handleClick} >Reset</button>
       </div>
       <form className="radio-form" >
         {

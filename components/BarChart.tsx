@@ -19,8 +19,6 @@ export default function BarChart(
   const { yearIsChecked, setYearIsChecked, selectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC, years } = useDataContext();
 
 
-  // // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
-
   const [selectedData, setSelectedData] = useState<SelectedState[]>([]);
 
   const clearYearIsChecked = () => {
@@ -71,14 +69,9 @@ export default function BarChart(
     } else if (selectedGroup === 'Stromerzeugung') {
       categoriesLC.map((category, i) => {
         const catString = category;
-        console.log(category)
         if (selectedCategory === categories[i]) {
-          console.log("Category: ", selectedCategory)
           years.map((year, index) => {
-            console.log("Jahr: ", year)
-            console.log("selectedData: ", selectedData)
             if ((yearIsChecked[index]) && (!selectedData.find(e => e.name === year))) {
-              console.log("READING: \n catString: ", catString, "index:", index)
               //@ts-ignore
               setSelectedData([...selectedData, { name: year, data: allData[1][catString][index] }])
             } else if (!yearIsChecked[index]) {
@@ -91,15 +84,8 @@ export default function BarChart(
       })
       //
     }
-
   }, [yearIsChecked, selectedGroup, selectedCategory])
 
-
-  useEffect(() => {
-    console.log("SelectedData:", selectedData)
-
-
-  }, [selectedData])
 
 
   const options = {
@@ -165,7 +151,6 @@ export default function BarChart(
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
-      // ref={chartComponentRef}
       // {...props} 
       />
     </div>

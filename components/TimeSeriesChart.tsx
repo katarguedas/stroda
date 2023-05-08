@@ -120,12 +120,12 @@ export default function TimeSeriesChart() {
       text: '...',
     },
     plotOptions: {
-      spline: {
+      series: {
         lineWidth: 2,
         states: {
-          hover: {
-            lineWidth: 3
-          }
+          // hover: {
+          //   lineWidth: 3
+          // }
         },
         // marker: {
         //   enabled: false
