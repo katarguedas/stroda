@@ -1,5 +1,4 @@
 import { useDataContext } from "@/lib/provider/dataContext";
-import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import { de } from 'date-fns/locale';
@@ -12,6 +11,11 @@ type Props = {
   handleChange: (date: Date) => void;
   selected: Date;
 }
+/*******************************
+ * StrodaDatePicker
+ * zur Auswahl des Zeitraums, für welchen die Zeitverläufe dargestellt werden 
+ */
+
 const StrodaDatePicker = ({ handleChange, selected }: Props) => {
 
   const { lastDay } = useDataContext();

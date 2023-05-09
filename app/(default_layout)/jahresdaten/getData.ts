@@ -44,7 +44,6 @@ const GetData = async () => {
     },
   ];
 
-  // console.log('gefetchte Daten für Balkendiagramm:', allData);
   return allData;
 };
 

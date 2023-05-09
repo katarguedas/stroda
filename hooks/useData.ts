@@ -7,9 +7,15 @@ import {
   formatValue,
 } from '@/lib/helpers/fetchDataHelper';
 
+/*************************************
+ *
+ * @returns useData custom hook
+ */
 const useData = () => {
   const { selectedGroup, firstDate, lastDate, categoryChecked, categories } =
     useDataContext();
+
+    //....................................
 
   const fetchTimeSeriesData = async () => {
     let firstId = 0;
@@ -53,17 +59,15 @@ const useData = () => {
     } catch (error) {
       console.log('error', error);
     }
-    //
-    let array = [firstId.toString()];
-    for (let i = firstId + 1; i < lastId + 1; i++) {
-      array.push(i.toString());
-    }
-    //-----
 
     let allData: number[][][] = [];
 
     try {
-      const data = await supabase.from(tableName).select().in('id', array);
+      const data = await supabase
+        .from(tableName)
+        .select()
+        .gt('id', (firstId - 1).toString())
+        .lt('id', (lastId + 1).toString());
 
       if (!data.data) {
         console.log('Keine Daten gefunden!');
@@ -92,17 +96,13 @@ const useData = () => {
           });
           allData.push(oneCat);
         }
-
         // console.log('ALL DATA:.....', allData);
       }
     } catch (error) {
       console.log('error', error);
-      // throw new Error('Gewünschte Daten nicht gefunden.');
+      throw new Error('Gewünschte Daten nicht gefunden.');
     }
-
     return allData;
-
-    // });
   };
 
   //-----------------------------

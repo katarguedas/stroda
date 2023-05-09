@@ -1,5 +1,4 @@
 'use client'
-
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official"
 
@@ -8,17 +7,17 @@ type Props = {
   title: string;
   subtitle: string;
 }
+
+/*******************************
+ *  BarChartYearlyData
+ */
+
 export default function BarChartYearlyData(
   { data, title, subtitle }: Props
 ) {
 
-  // // const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   const wholeYears = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
-  const name = 'Stromverbrauch';
-
-  console.log(title, subtitle)
-  console.log(data)
 
   const options = {
     chart: {
@@ -58,9 +57,6 @@ export default function BarChartYearlyData(
         style: {
           fontSize: '1.0em'
         },
-        // formatter: function () {
-        //   return this.value / 1000000 + 'M';
-        // }
       },
       title: {
         text: 'MWh',
@@ -78,7 +74,10 @@ export default function BarChartYearlyData(
     },
     series: {
       name: '',
-      data: data
+      data: data,
+      accessibility: {
+        description: ''
+      }
     }
   };
 
@@ -87,8 +86,6 @@ export default function BarChartYearlyData(
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
-      // ref={chartComponentRef}
-      // {...props} 
       />
     </div>
   )

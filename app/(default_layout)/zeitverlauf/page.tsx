@@ -1,5 +1,6 @@
 import SelectionPanel2 from "@/components/SelectionPanel2"
 import TimeSeriesChart from "@/components/TimeSeriesChart";
+
 //
 export default function ZeitverlaufPage() {
 

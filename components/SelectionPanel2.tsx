@@ -2,19 +2,26 @@
 import { useDataContext } from "@/lib/provider/dataContext";
 import StrodaDatePicker from "./StrodaDatePicker";
 import { useEffect } from "react";
-//.......................
+import useCharts from "@/hooks/useCharts";
+
+/*********************************
+ * SelectionPanel2
+ * radio-Buttons und checkboxen für die Auswahl der Parameter,
+ * die zur Darstellung der gewünschten Zeitverläufe erforderlich sind
+ */
 
 export default function SelectionPanel2() {
 
   const { groups, selectedGroup, setSelectedGroup, categories, categoryChecked, setCategoryChecked, firstDate, setFirstDate, lastDate, setLastDate, setShowChart, setSearchedCategory
   } = useDataContext();
 
+  const [clearcategoryChecked] = useCharts();
+
   //.......................
 
   useEffect(() => {
     setSelectedGroup('')
   }, [])
-
 
   useEffect(() => {
     if (selectedGroup === 'Stromverbrauch') {
@@ -25,15 +32,6 @@ export default function SelectionPanel2() {
     }
   }, [selectedGroup, categoryChecked])
 
-
-  const clearcategoryChecked = () => {
-    setCategoryChecked(
-      categoryChecked.map((e, i) => {
-        if (e === true) e = !e;
-        return e;
-      }),
-    );
-  };
 
   //.......................
 
@@ -46,8 +44,6 @@ export default function SelectionPanel2() {
       })
     );
   }
-
-  //.......................
 
   const handleStartDate = (date: Date) => {
     setFirstDate(date);
@@ -66,6 +62,7 @@ export default function SelectionPanel2() {
     <div className="panel2" >
       <div className="datePicker-wrapper" >
         <StrodaDatePicker
+        
           handleChange={handleStartDate}
           selected={firstDate}
         />

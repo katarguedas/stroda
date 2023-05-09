@@ -13,7 +13,6 @@ const years = [
 ];
 
 export const calcData = async () => {
-  // const allData = await GetData();
   const data = await fetchData('Stromverbrauch', years, 'Gesamt');
 
   let verbrauch: number[] = new Array(years.length);

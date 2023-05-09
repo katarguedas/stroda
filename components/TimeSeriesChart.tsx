@@ -1,6 +1,8 @@
 'use client'
 import { useDataContext } from "@/lib/provider/dataContext";
 import useData from "@/hooks/useData";
+import useCharts from "@/hooks/useCharts";
+
 import { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official"
@@ -13,9 +15,15 @@ type ChartData = {
   data: number[][]
 }
 
+/********************************************
+ * TimeSeriesChart
+ */
+
 export default function TimeSeriesChart() {
 
-  const { showChart, selectedGroup, categoryChecked, setCategoryChecked, setShowChart, categories, firstDate, lastDate, setSelectedGroup } = useDataContext();
+  const { selectedGroup, categoryChecked, setShowChart, categories, firstDate, lastDate, setSelectedGroup } = useDataContext();
+
+  const [clearcategoryChecked] = useCharts();
   const [fetchTimeSeriesData] = useData();
   const [chartData, setChartData] = useState<ChartData[]>(undefined!);
   const [fetchedData, setFetchedData] = useState<number[][][]>(undefined!)
@@ -26,6 +34,8 @@ export default function TimeSeriesChart() {
     setSelectedGroup('');
   }, [])
 
+  //.........................
+
   const removeData = (name: string) => {
     const tmp = [...chartData];
     const data = tmp.filter(e => e.name !== name);
@@ -33,14 +43,12 @@ export default function TimeSeriesChart() {
   }
 
   const getChartData = () => {
-
     const checkData = (name: string) => {
       const index = chartData.findIndex(e => e.name === name);
       if (index > -1)
         return true
       else return false
     }
-
     if (fetchedData) {
       if (selectedGroup === 'Stromverbrauch') {
         setChartData([{ name: 'Stromverbrauch gesamt', type: 'line', data: fetchedData[0] }]);
@@ -63,6 +71,8 @@ export default function TimeSeriesChart() {
     setFetchedData(dat);
   }
 
+  //.....................................
+
   useEffect(() => {
     getChartData();
   }, [fetchedData])
@@ -72,16 +82,6 @@ export default function TimeSeriesChart() {
     if (selectedGroup)
       fetchData();
   }, [firstDate, lastDate, selectedGroup])
-
-
-  const clearcategoryChecked = () => {
-    setCategoryChecked(
-      categoryChecked.map((e, i) => {
-        if (e === true) e = !e;
-        return e;
-      }),
-    );
-  };
 
 
   useEffect(() => {
@@ -95,7 +95,6 @@ export default function TimeSeriesChart() {
 
   useEffect(() => {
     if (selectedGroup === 'Stromerzeugung') {
-      // setSearchedCategory('');
       clearcategoryChecked();
       setChartData([]);
       setShowChart(false);

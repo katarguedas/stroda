@@ -22,7 +22,7 @@ header h3 {
 }
 
 .site-title {
-  margin: 0.5rem 0rem 0.5rem 2.0rem;
+  margin: 0.5rem 0rem 1.5rem 2.0rem;
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--site-title-color);
@@ -83,14 +83,17 @@ button {
   padding: 0.5rem 1.0rem;
   background-color: var(--celadon-blue);
 	background:linear-gradient(to bottom, #4586aa 5%, #3270af 80%);
-
+  width: 5rem;
   border-radius: 0.5rem;
   color: #fff;
   .button:active {
     background:linear-gradient(to bottom, #38831e 5%, #7dc665 90%);
     position:relative;
     top:1px;
-    color: #bedcb4;
+    color: #fff;
+  }
+  .button:visited {
+    color: #fff;
   }
 }
 

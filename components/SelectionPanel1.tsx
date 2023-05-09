@@ -2,7 +2,11 @@
 import { useDataContext } from "@/lib/provider/dataContext";
 import { useEffect } from "react";
 
-
+/*********************************
+ * SelectionPanel1
+ * radio-Buttons und checkboxen für die Auswahl der Parameter,
+ * die zur Darstellung der gewünschten Balken-Diagramme erforderlich sind
+ */
 
 export default function SelectionPanel1() {
 

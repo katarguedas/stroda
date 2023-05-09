@@ -5,37 +5,27 @@ import { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official"
 import type { Alldata } from "@/types/supabase-myTypes";
-
+import useCharts from "@/hooks/useCharts";
 
 type SelectedState = {
   name: string;
   data: number[];
 }
 
+/********************************************
+ * TimeSeriesChart
+ */
+
 export default function BarChart(
   allData: Alldata
 ) {
 
-  const { yearIsChecked, setYearIsChecked, selectedGroup, selectedCategory, setSelectedCategory, categories, categoriesLC, years } = useDataContext();
+  const { yearIsChecked, selectedGroup, selectedCategory, categories, categoriesLC, years, monthStringArray } = useDataContext();
 
+  const [resetYears, resetCategory] = useCharts();
 
   const [selectedData, setSelectedData] = useState<SelectedState[]>([]);
 
-  const clearYearIsChecked = () => {
-    setYearIsChecked(
-      yearIsChecked.map((e, i) => {
-        if (e === true) e = !e;
-        return e;
-      }),
-    );
-  };
-
-  const resetYears = () => {
-    clearYearIsChecked();
-  }
-  const resetCategory = () => {
-    setSelectedCategory('');
-  }
 
   useEffect(() => {
     resetYears();
@@ -86,7 +76,7 @@ export default function BarChart(
     }
   }, [yearIsChecked, selectedGroup, selectedCategory])
 
-
+  //................................................
 
   const options = {
     chart: {
@@ -113,8 +103,7 @@ export default function BarChart(
           fontSize: '1.25em'
         }
       },
-      categories:
-        ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+      categories: monthStringArray,
       tickLength: 1,
 
     },
