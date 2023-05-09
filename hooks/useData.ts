@@ -12,7 +12,7 @@ import {
  * @returns useData custom hook
  */
 const useData = () => {
-  const { selectedGroup, firstDate, lastDate, categoryChecked, categories } =
+  const { selectedGroup, firstDate, lastDate, categories } =
     useDataContext();
 
     //....................................

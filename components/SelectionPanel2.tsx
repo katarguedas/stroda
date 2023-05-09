@@ -60,16 +60,18 @@ export default function SelectionPanel2() {
 
   return (
     <div className="panel2" >
-      <div className="datePicker-wrapper" >
-        <StrodaDatePicker
-        
-          handleChange={handleStartDate}
-          selected={firstDate}
-        />
-        <StrodaDatePicker
-          handleChange={handleEndDate}
-          selected={lastDate}
-        />
+      <div>
+        <div className="datePicker-wrapper" >
+          <StrodaDatePicker
+
+            handleChange={handleStartDate}
+            selected={firstDate}
+          />
+          <StrodaDatePicker
+            handleChange={handleEndDate}
+            selected={lastDate}
+          />
+        </div>
         <button onClick={handleClick} >Reset</button>
       </div>
       <form className="radio-form" >

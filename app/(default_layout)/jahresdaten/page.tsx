@@ -12,7 +12,7 @@ export default async function JahresdatenPage() {
   return (
     <div>
       <div className="content" >
-        <p className="site-title" >Jahresbetrachtung</p>
+        <p className="site-title" >Jahresdaten</p>
         <SelectionPanel1 />
         <div>
           <BarChart

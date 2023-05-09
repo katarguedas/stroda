@@ -1,5 +1,6 @@
 'use client'
 import { useDataContext } from "@/lib/provider/dataContext";
+import useCharts from "@/hooks/useCharts";
 import { useEffect } from "react";
 
 /*********************************
@@ -13,6 +14,7 @@ export default function SelectionPanel1() {
   const { years, yearIsChecked, setYearIsChecked, groups, selectedGroup, setSelectedGroup, selectedCategory, categories, setSelectedCategory
   } = useDataContext();
 
+  const [resetYears, resetCategory] = useCharts();
 
   useEffect(() => {
     setSelectedGroup('')
@@ -27,26 +29,36 @@ export default function SelectionPanel1() {
     );
   }
 
+  const handleClick = () => {
+    setSelectedGroup('')
+    resetYears();
+    resetCategory();
+  }
+
   return (
     <div className="panel1" >
-      <form className="radio-form" >
-        {
-          groups.map((group, index) => (
-            <div key={index} >
-              <input
-                className="radio"
-                type="radio"
-                name="group"
-                id={`group${index + 1}`}
-                value={groups[index]}
-                // checked={ } 
-                onChange={() => setSelectedGroup(group)}
-              ></input>
-              <label>{group}</label>
-            </div>
-          ))
-        }
-      </form>
+      <div style={{ display: 'inline-flex', alignItems: 'center' }}  >
+        <form className="radio-form" >
+          {
+            groups.map((group, index) => (
+              <div key={index} >
+                <input
+                  className="radio"
+                  type="radio"
+                  name="group"
+                  id={`group${index + 1}`}
+                  value={groups[index]}
+                  // checked={ } 
+                  onChange={() => setSelectedGroup(group)}
+                ></input>
+                <label>{group}</label>
+              </div>
+            ))
+          }
+        </form>
+        <button onClick={handleClick} >Reset</button>
+      </div>
+
       {
         selectedGroup === 'Stromerzeugung' ?
           <form className="radio-form" >
