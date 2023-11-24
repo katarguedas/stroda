@@ -1,3 +1,4 @@
+import {useCallback} from 'react'
 import { useDataContext } from '@/lib/provider/dataContext';
 
 const useCharts = () => {
@@ -9,23 +10,25 @@ const useCharts = () => {
     setSelectedCategory,
   } = useDataContext();
 
-  
-  const resetYears = () => {
-    clearYearIsChecked();
-  };
 
   const resetCategory = () => {
     setSelectedCategory('');
   };
 
-  const clearYearIsChecked = () => {
+ const clearYearIsChecked = useCallback(function clearYearIsChecked ()  {
     setYearIsChecked(
       yearIsChecked.map((e, i) => {
         if (e === true) e = !e;
         return e;
       })
     );
-  };
+ }, [setYearIsChecked, yearIsChecked]);
+  
+  
+ const resetYears: Function = useCallback<Function>(function resetYears() {
+  clearYearIsChecked();
+},[clearYearIsChecked]);
+
 
   const clearcategoryChecked = () => {
     setCategoryChecked(

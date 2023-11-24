@@ -1,4 +1,5 @@
 'use client'
+import {useState, useEffect} from 'react'
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official"
 
@@ -16,8 +17,11 @@ export default function BarChartYearlyData(
   { data, title, subtitle }: Props
 ) {
 
+  const [wholeYears, setWholeYears] = useState<string[]>([]);
 
-  const wholeYears = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
+  useEffect(() => {
+    setWholeYears(['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022']);
+  },[data])
 
   const options = {
     chart: {
@@ -73,7 +77,7 @@ export default function BarChartYearlyData(
       }
     },
     series: {
-      name: '',
+      name: 'xx',
       data: data,
       accessibility: {
         description: ''
@@ -82,7 +86,7 @@ export default function BarChartYearlyData(
   };
 
   return (
-    <div>
+    <div style={{display: 'flex'}}>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

@@ -24,5 +24,6 @@ export const calcData = async () => {
   const searchedData = verbrauch.filter(function (value) {
     return !Number.isNaN(value);
   });
+  console.log(searchedData)
   return searchedData;
 };
