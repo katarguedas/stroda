@@ -33,7 +33,7 @@ const monthStringArray = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 
 const groups = ['Stromverbrauch', 'Stromerzeugung'];
 const categories = ['Biomasse', 'Braunkohle', 'Erdgas', 'Kernenergie', 'Photovoltaik', 'Pumpspeicher', 'sonstige Erneuerbare', 'sonstige Konventionelle', 'Steinkohle', 'Wasserkraft', 'Wind Offshore', 'Wind Onshore']
 const categoriesLC = ['biomasse', 'braunkohle', 'erdgas', 'kernenergie', 'photovoltaik', 'pumpspeicher', 'sonstigeErneuerbare', 'sonstigeKonventionelle', 'steinkohle', 'wasserkraft', 'windOffshore', 'WindOnshore']
-const lastDay = "2023-04-29";
+const lastDay = "2024-01-31";
 
 
 const DataContext = createContext<ContextTypes>(null!)
