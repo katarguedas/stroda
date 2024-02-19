@@ -12,10 +12,9 @@ import {
  * @returns useData custom hook
  */
 const useData = () => {
-  const { selectedGroup, firstDate, lastDate, categories } =
-    useDataContext();
+  const { selectedGroup, firstDate, lastDate, categories } = useDataContext();
 
-    //....................................
+  //....................................
 
   const fetchTimeSeriesData = async () => {
     let firstId = 0;
@@ -59,6 +58,7 @@ const useData = () => {
     } catch (error) {
       console.log('error', error);
     }
+
 
     let allData: number[][][] = [];
 
