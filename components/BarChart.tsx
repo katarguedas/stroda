@@ -119,7 +119,7 @@ export default function BarChart(
       },
 
       title: {
-        text: 'MWh',
+        text: 'TWh',
         style: {
           fontSize: '1.5em'
         }

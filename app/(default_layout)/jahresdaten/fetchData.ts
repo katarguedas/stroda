@@ -64,7 +64,7 @@ export const fetchData = async (
             return;
           }
         });
-        const sumOneMonth = gesamtOneMonth.reduce((pv, cv) => pv + cv, 0);
+        const sumOneMonth = gesamtOneMonth.reduce((pv, cv) => pv + cv, 0)* 1000 * 1000;
         oneYear.push(sumOneMonth);
       }
       monthlyDataPerYear[i] = oneYear;

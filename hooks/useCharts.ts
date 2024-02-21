@@ -33,8 +33,9 @@ const useCharts = () => {
   const clearcategoryChecked = () => {
     setCategoryChecked(
       categoryChecked.map((e, i) => {
-        if (e === true) e = !e;
-        return e;
+        // if (e === true) e = !e;
+        // return e;
+        return false;
       })
     );
   };

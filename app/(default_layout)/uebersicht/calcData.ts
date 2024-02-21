@@ -19,11 +19,10 @@ export const calcData = async () => {
 
   for (let i = 0; i < 9; i++) {
     const sum = data[i].reduce((pv, cv) => pv + cv, 0);
-    verbrauch[i] = sum;
+    verbrauch[i] = sum; // Daten sind bereits in MWh
   }
   const searchedData = verbrauch.filter(function (value) {
     return !Number.isNaN(value);
   });
-  console.log(searchedData)
   return searchedData;
 };

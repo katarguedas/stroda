@@ -1,7 +1,7 @@
 'use client'
 import { useDataContext } from "@/lib/provider/dataContext";
 import useCharts from "@/hooks/useCharts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /*********************************
  * SelectionPanel1
@@ -15,10 +15,17 @@ export default function SelectionPanel1() {
   } = useDataContext();
 
   const [resetYears, resetCategory] = useCharts();
+  const [reset, setReset] = useState(false);
 
   useEffect(() => {
     setSelectedGroup('')
   }, [])
+
+  useEffect(() => {
+    if (selectedGroup === '') {
+      setReset(false);
+    }
+  }, [selectedGroup])
 
   const handleChange = (index: number) => {
     setYearIsChecked(
@@ -30,7 +37,9 @@ export default function SelectionPanel1() {
   }
 
   const handleClick = () => {
-    setSelectedGroup('')
+    setReset(true);
+    setSelectedGroup('');
+    setSelectedCategory('');
     resetYears();
     resetCategory();
   }
@@ -40,6 +49,7 @@ export default function SelectionPanel1() {
       <div style={{ display: 'inline-flex', alignItems: 'center' }}  >
         <form className="radio-form" >
           {
+            !reset &&
             groups.map((group, index) => (
               <div key={index} >
                 <input

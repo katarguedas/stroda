@@ -63,7 +63,7 @@ export default function BarChartYearlyData(
         },
       },
       title: {
-        text: 'MWh',
+        text: 'TWh',
         style: {
           fontSize: '1.5em'
         }

@@ -1,8 +1,9 @@
 'use client'
 import { useDataContext } from "@/lib/provider/dataContext";
 import StrodaDatePicker from "./StrodaDatePicker";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useCharts from "@/hooks/useCharts";
+import { clear } from "console";
 
 /*********************************
  * SelectionPanel2
@@ -16,6 +17,7 @@ export default function SelectionPanel2() {
   } = useDataContext();
 
   const [clearcategoryChecked] = useCharts();
+  const [reset, setReset] = useState(false);
 
   //.......................
 
@@ -30,8 +32,21 @@ export default function SelectionPanel2() {
     if (selectedGroup === 'Stromverbrauch' || categoryChecked.includes(true)) {
       setShowChart(true);
     }
+    if (selectedGroup === '') {
+      setReset(false);
+    }
   }, [selectedGroup, categoryChecked])
 
+
+  useEffect(() => {
+    if (reset) {
+      setCategoryChecked(
+        categoryChecked.map(e => {
+          return false;
+        })
+      );
+    }
+  }, [reset])
 
   //.......................
 
@@ -53,8 +68,10 @@ export default function SelectionPanel2() {
   }
 
   const handleClick = () => {
+    setReset(true);
     setShowChart(true);
     setSelectedGroup('');
+    setSearchedCategory('');
     clearcategoryChecked();
   }
 
@@ -76,6 +93,8 @@ export default function SelectionPanel2() {
       </div>
       <form className="radio-form" >
         {
+          !reset &&
+
           groups.map((group, index) => (
             <div key={index} >
               <input
